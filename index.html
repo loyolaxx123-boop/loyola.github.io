@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Love Confession</title>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Georgia&display=swap");
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Georgia", serif;
+    background: linear-gradient(180deg, #fce6e8, #f9d6db);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px 25px 50px;
+    box-sizing: border-box;
+    background: #fff0f7;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgb(246 180 25 / 0.3);
+  }
+
+  .confession-card {
+    background: #fff;
+    border: 2px solid #f6b419;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(246, 180, 25, 0.3);
+    padding: 35px 30px 50px;
+    text-align: center;
+    position: relative;
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+    font-weight: 400;
+    user-select: none;
+    margin-bottom: 35px;
+  }
+
+  .confession-card .emoji-top {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .quote-icon-left,
+  .quote-icon-right {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 32px;
+    color: #fccbd8;
+    position: absolute;
+  }
+
+  .quote-icon-left {
+    top: 20px;
+    left: 25px;
+  }
+
+  .quote-icon-right {
+    bottom: 22px;
+    right: 25px;
+  }
+
+  .confession-text {
+    user-select: text;
+    margin-bottom: 15px;
+    white-space: pre-wrap; /* Preserve line breaks */
+  }
+
+  .heart-bg {
+    position: absolute;
+    top: 55%;
+    left: 25px;
+    right: 25px;
+    bottom: 55px;
+    background:
+      url('data:image/svg+xml;utf8,<svg fill="%23fccbd8" height="100" viewBox="0 0 24 24" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center;
+    opacity: 0.12;
+    filter: blur(5px);
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+
+  .confession-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .subtitle {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    color: #888;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+
+  button {
+    border: none;
+    border-radius: 30px;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    user-select: none;
+  }
+
+  .btn-pink {
+    background: linear-gradient(45deg, #f43b47, #453a94);
+  }
+  .btn-pink:hover {
+    background: linear-gradient(45deg, #ff527a, #6b49dd);
+  }
+
+  .btn-yellow {
+    background: linear-gradient(45deg, #ffbb33, #ffa500);
+    color: #333;
+    font-weight: 700;
+  }
+  .btn-yellow:hover {
+    background: linear-gradient(45deg, #ffcf47, #ffb300);
+  }
+
+  .btn-purple {
+    background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+  }
+  .btn-purple:hover {
+    background: linear-gradient(45deg, #bc9aff, #f3a7f9);
+  }
+
+  /* Text input box */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  label {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 4px;
+    font-weight: 600;
+    user-select: none;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #f6b419;
+    border-radius: 30px;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Georgia", serif;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus {
+    border-color: #453a94;
+  }
+
+  input::placeholder {
+    color: #bbb;
+  }
+
+  input[type="submit"] {
+    max-width: 160px;
+    background: linear-gradient(45deg, #f43b47, #453a94);
+    color: white;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    padding: 14px 0;
+    border: none;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+
+  input[type="submit"]:hover {
+    background: linear-gradient(45deg, #ff527a, #6b49dd);
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .container {
+      padding: 25px 20px 40px;
+    }
+
+    .confession-card {
+      padding: 25px 20px 40px;
+      font-size: 16px;
+    }
+
+    button {
+      font-size: 14px;
+      padding: 12px 18px;
+    }
+
+    input[type="text"] {
+      font-size: 14px;
+      padding: 10px 12px;
+    }
+
+    input[type="submit"] {
+      font-size: 14px;
+      padding: 12px 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="confession-card">
+      <div class="emoji-top">✨ ❤️ ✨</div>
+      <span class="quote-icon-left">“</span>
+      <p class="confession-text">
+        crush kita, i know this is to sudden and i would like you to know that im not waiting for your answer i just want to express what i felt for you no pressured at all 🙂
+      </p>
+      <span class="quote-icon-right">”</span>
+      <div class="heart-bg"></div>
+    </div>
+
+    <div class="subtitle">HOW DO YOU FEEL?</div>
+    <div class="button-group">
+      <button class="btn-pink" onclick="response('I feel the same way 💕')">i feel the same way 💕</button>
+      <button class="btn-yellow" onclick="response('Let me think about it 🤔')">Let me think about it 🤔</button>
+      <button class="btn-purple" onclick="response('Thank you for telling me 🥰')">Thank you for telling me 🥰</button>
+    </div>
+
+    <!-- New input form -->
+    <form id="messageForm" onsubmit="sendMessage(event)">
+      <label for="userMessage">Send your message:</label>
+      <input
+        id="userMessage"
+        type="text"
+        name="userMessage"
+        placeholder="Write a short message..."
+        required
+        maxlength="100"
+      />
+      <input type="submit" value="Send" />
+    </form>
+  </div>
+
+<script>
+  function response(message) {
+    alert(message);
+  }
+
+  function sendMessage(event) {
+    event.preventDefault();
+
+    const input = document.getElementById("userMessage");
+    const message = input.value.trim();
+
+    if (!message) {
+      alert("Please enter a message before sending.");
+      return;
+    }
+
+    // This example uses mailto to open the user's email client.
+    // Replace "youremail@example.com" with your real email address.
+    const email = "youremail@example.com";
+    const subject = encodeURIComponent("New message from your love confession site");
+    const body = encodeURIComponent(message);
+
+    // Open default mail client with prefilled email
+    window.location.href = mailto:${email}?subject=${subject}&body=${body};
+
+    // Optionally, clear input after submission
+    input.value = "";
+  }
+</script>
+</body>
+</html>
+
